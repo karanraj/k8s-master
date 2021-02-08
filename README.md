@@ -1,38 +1,32 @@
-Role Name
+k8s-maste
 =========
 
-A brief description of the role goes here.
+This role will configure master node of kubernetes multi node cluster on AWS Amazon linux
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+To successfully configure master node you must have an Amazon linux ec2-instance launched on AWS whose public IP uploaded on your inventory file under group-name master.
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
-
+In /vars/main.yml update update the cidr block to initilize the kubeadm service.
+ And download the flannel plugin playbook.yml and keep in template directory use jinja template to update the cidr block in network part.
+[flannel-plugin](https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml)
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+After this role run you can run slave node setup whole link given below
+[k8s-slave-node-setup]()
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
+    - hosts: master
       roles:
-         - { role: username.rolename, x: 42 }
+         - { role: karanraj.k8s_master }
 
-License
--------
+* See Also
+  [k8s-slave-node-setup](https://galaxy.ansible.com/karanraj/k8s_slave)
 
-BSD
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
